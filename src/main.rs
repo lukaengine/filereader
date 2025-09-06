@@ -1,5 +1,6 @@
 use std::fs::File;
 use std::io::{self, Write, Read};
+use std::fs;
 
 
 fn main() {
@@ -18,6 +19,8 @@ fn main() {
 
         match input {
             "1." => createfile(),
+            "2." => readfile(),
+            "3." => writefile(),
             _ => println!("Okay!")
 
         }
@@ -52,6 +55,46 @@ fn createfile() {
         
     }
 
+
+
+}
+
+
+fn readfile() {
+    let mut variable = String::new();
+    println!("please enter the file you wish to read.");
+    io::stdin().read_line(&mut variable);
+
+    let variable = variable.trim();
+
+    let contents = fs::read_to_string(variable).unwrap();
+
+    
+
+    println!("{}", contents);
+
+
+
+
+}
+
+fn writefile() {
+    println!("please select which fil =e you wish to write to");
+    let mut text = String::new();
+    io::stdin().read_line(&mut text);
+
+    let text = text.trim();
+
+    println!("now write the u wish in there");
+    let mut the_write = String::new();
+    io::stdin().read_line(&mut the_write);
+
+    let the_write = the_write.trim();
+
+    let mut file = File::create(text).unwrap();
+    file.write_all(the_write.as_bytes()).unwrap();
+
+    
 
 
 }
